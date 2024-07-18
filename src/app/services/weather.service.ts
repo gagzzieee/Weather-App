@@ -8,7 +8,7 @@ import { map, Observable } from 'rxjs';
 export class WeatherService {
 
  
-  private apiKey = '8deef84323987c0ebf156c7739e2eeb6';
+  private apiKey = '';
   private weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
   private forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
 
