@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <div class="card mx-auto weather-card">
+    <div class="card-body">
+      <h5 class="card-title text-center text-primary">Weather App</h5>
+      <div class="mb-3">
+        <label for="city" class="form-label">Enter City:</label>
+        <input id="city" [(ngModel)]="selectedCity" class="form-control" placeholder="Enter city name">
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary btn-lg" (click)="getWeather()">Get Weather</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="weatherData" class="card mt-3 mx-auto weather-card">
+    <div class="card-body text-center">
+      <h2 class="card-title text-success">{{ weatherData.name }}</h2>
+      <p class="card-text display-4">{{ weatherData.main.temp }}°C</p>
+      <div [ngSwitch]="weatherData.weather[0].main">
+        <div *ngSwitchCase="'Sunny'" class="text-center">
+          <img src="assets/sunny.png" alt="Sunny" class="img-fluid animate__animated animate__fadeIn">
+          <p class="text-warning">Enjoy the sunshine!</p>
+        </div>
+        <div *ngSwitchCase="'Clouds'" class="text-center">
+          <img src="assets/cloudy.png" alt="Cloudy" class="img-fluid animate__animated animate__fadeIn">
+          <p class="text-muted">It's a bit gloomy today</p>
+        </div>
+        <div *ngSwitchCase="'Rain'" class="text-center">
+          <img src="assets/rainy.png" alt="Rainy" class="img-fluid animate__animated animate__fadeIn">
+          <p class="text-primary">Don't forget your umbrella!</p>
+        </div>
+        <div *ngSwitchDefault class="text-center">
+          <img src="assets/default.png" alt="Weather" class="img-fluid animate__animated animate__fadeIn">
+          <p class="text-info">Weather is unpredictable!</p>
+        </div>
+      </div>
+      <h3 class="mt-4">3-Day Forecast</h3>
+      <ul class="list-group">
+        <li *ngFor="let day of forecast" class="list-group-item">
+          <p class="mb-1">{{ day.date | date:'mediumDate' }}: {{ day.temp }}°C ({{ day.weather }})</p>
+          <img [src]="'http://openweathermap.org/img/wn/' + day.icon + '@2x.png'" alt="Weather Icon" class="img-fluid">
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
